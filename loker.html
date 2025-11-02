@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loker - Lowongan Pekerjaan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #ffffff;
+            color: white;
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        .daftar-btn {
+            background-color: #00b894;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2d3436;
+        }
+
+        .page-subtitle {
+            color: #636e72;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .search-box {
+            background-color: #e8f4f8;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: #636e72;
+        }
+
+        .search-input::placeholder {
+            color: #636e72;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #636e72;
+        }
+
+        .search-input {
+            padding-left: 25px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .filter-tab {
+            color: #636e72;
+            text-decoration: none;
+            font-size: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .filter-tab.active {
+            color: #2d3436;
+            border-bottom-color: #00b894;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2d3436;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+
+        .job-meta {
+            color: #636e72;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .job-meta span {
+            margin-right: 5px;
+        }
+
+        .detail-btn {
+            background-color: #f8f9fa;
+            color: #2d3436;
+            border: 1px solid #dee2e6;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .detail-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .job-image {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-left: 20px;
+        }
+
+        .job-image.chart {
+            background: linear-gradient(135deg, #e8f5e8, #d4f1d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .job-image.teal {
+            background: #4ecdc4;
+        }
+
+        .job-image.orange {
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .pagination a {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #636e72;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f1f3f4;
+        }
+
+        .pagination a.active {
+            background-color: #2d3436;
+            color: white;
+        }
+
+        .pagination .dots {
+            color: #636e72;
+            padding: 0 5px;
+        }
+
+        /* Chart styling for data analyst job */
+        .mini-chart {
+            width: 60px;
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40"><rect x="5" y="25" width="4" height="10" fill="%234285f4"/><rect x="12" y="20" width="4" height="15" fill="%234285f4"/><rect x="19" y="15" width="4" height="20" fill="%234285f4"/><rect x="26" y="10" width="4" height="25" fill="%234285f4"/><rect x="33" y="18" width="4" height="17" fill="%234285f4"/><rect x="40" y="22" width="4" height="13" fill="%234285f4"/><rect x="47" y="28" width="4" height="7" fill="%234285f4"/></svg>') no-repeat center;
+            background-size: contain;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">loker</div>
+                <nav class="nav-menu">
+                    <a href="#">Beranda</a>
+                    <a href="#">Tentang Kami</a>
+                    <a href="#">Lowongan Kerja</a>
+                    <a href="#">Kontak</a>
+                    <a href="#" class="daftar-btn">Daftar</a>
+                    <a href="#">Masuk</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Lowongan Pekerjaan</h1>
+            <p class="page-subtitle">Temukan peluang kerja yang mendukung pertumbuhan Anda.</p>
+            
+            <div class="search-box">
+                🔍 <input type="text" class="search-input" placeholder="Cari pekerjaan berdasarkan posisi, perusahaan, atau keterampilan">
+            </div>
+
+            <div class="filter-tabs">
+                <a href="#" class="filter-tab active">Lokasi</a>
+                <a href="#" class="filter-tab">Industri</a>
+                <a href="#" class="filter-tab">Tingkat Pengalaman</a>
+                <a href="#" class="filter-tab">Jenis Pekerjaan</a>
+            </div>
+
+            <h2 class="section-title">Pekerjaan yang Tersedia</h2>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <h3>Pengembang Perangkat Lunak</h3>
+                    <div class="job-meta">
+                        <span>Perusahaan Teknologi</span> | <span>Jakarta</span>
+                    </div>
+                    <a href="#" class="detail-btn">Lihat Detail</a>
+                </div>
+                <div class="job-image" style="background: linear-gradient(135deg, #3b82f6, #1e40af); display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 80px; height: 60px; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 60\"><rect x=\"10\" y=\"10\" width=\"80\" height=\"40\" fill=\"white\" opacity=\"0.9\" rx=\"4\"/><rect x=\"15\" y=\"15\" width=\"70\" height=\"8\" fill=\"%23ddd\" rx=\"2\"/><rect x=\"15\" y=\"26\" width=\"50\" height=\"6\" fill=\"%23ddd\" rx=\"2\"/><rect x=\"15\" y=\"35\" width=\"60\" height=\"6\" fill=\"%23ddd\" rx=\"2\"/><rect x=\"15\" y=\"44\" width=\"40\" height=\"6\" fill=\"%23ddd\" rx=\"2\"/></svg>') no-repeat center; background-size: contain;"></div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <h3>Analis Data</h3>
+                    <div class="job-meta">
+                        <span>Konsultan Bisnis Terkemuka</span> | <span>Bandung</span>
+                    </div>
+                    <a href="#" class="detail-btn">Lihat Detail</a>
+                </div>
+                <div class="job-image chart">
+                    <div class="mini-chart"></div>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <h3>Spesialis Pemasaran Digital</h3>
+                    <div class="job-meta">
+                        <span>Agensi Kreatif</span> | <span>Surabaya</span>
+                    </div>
+                    <a href="#" class="detail-btn">Lihat Detail</a>
+                </div>
+                <div class="job-image teal"></div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-info">
+                    <h3>Desainer Grafis</h3>
+                    <div class="job-meta">
+                        <span>Studio Desain Independen</span> | <span>Yogyakarta</span>
+                    </div>
+                    <a href="#" class="detail-btn">Lihat Detail</a>
+                </div>
+                <div class="job-image orange"></div>
+            </div>
+
+            <div class="pagination">
+                <a href="#">‹</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <span class="dots">...</span>
+                <a href="#">10</a>
+                <a href="#">›</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
